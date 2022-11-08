@@ -149,7 +149,11 @@ void main(){
 				
 			case 2: 
 				printf("----------------CONTATOS----------------");
-				for(j=0;j<i;j++){ mostrarPessoa(agenda[j]); printf("\n\n");}
+				if(i==0){
+					printf("\n\n\tAgenda Vazia\n\n");
+				} else {
+					for(j=0;j<i;j++){ mostrarPessoa(agenda[j]); printf("\n\n");}
+				};
 				break;
 				
 			case 3: 
@@ -175,14 +179,25 @@ void main(){
 				for(j=0;j<i;j++){
 					if(strcmp(busca_nome, agenda[j].nome) == 0){
 						printf("Contato removido\n");
-						agenda[j] = agenda[j+1];
-						for(t=1;t<i; s++, t++){
-							agenda[j+t] = agenda[j+s];
+						for(t=0, s=1; t<i; s++, t++){
+							strcpy(agenda[j+t].nome, agenda[j+s].nome);
+							strcpy(agenda[j+t].email, agenda[j+s].email);
+							strcpy(agenda[j+t].endereco.rua, agenda[j+s].endereco.rua);
+							agenda[j+t].endereco.numero = agenda[j+s].endereco.numero;
+							strcpy(agenda[j+t].endereco.bairro, agenda[j+s].endereco.bairro);
+							strcpy(agenda[j+t].endereco.cep, agenda[j+s].endereco.cep);
+							strcpy(agenda[j+t].endereco.complemento, agenda[j+s].endereco.complemento);
+							strcpy(agenda[j+t].endereco.cidade, agenda[j+s].endereco.cidade);
+							strcpy(agenda[j+t].endereco.estado, agenda[j+s].endereco.estado);
+							strcpy(agenda[j+t].endereco.pais, agenda[j+s].endereco.pais);
+							strcpy(agenda[j+t].telefone.ddd, agenda[j+s].telefone.ddd);
+							strcpy(agenda[j+t].telefone.numero, agenda[j+s].telefone.numero);
+							agenda[j+t].data_nasc.dia = agenda[j+s].data_nasc.dia;
+							agenda[j+t].data_nasc.mes = agenda[j+s].data_nasc.mes;
+							agenda[j+t].data_nasc.ano = agenda[j+s].data_nasc.ano;
 						}
-						i--;
-						break;	
-					} else {
-						printf("Nao há nenhum contato com este nome!\n");
+					i--;
+					break;
 					}
 				}; break;	
 				
